@@ -18,4 +18,3 @@ You should copy `.env.sample` to `.env` and then:
 `npm run build` - Builds the server.
 
 `npm start` - Runs the server.
-# cv-app-view-api

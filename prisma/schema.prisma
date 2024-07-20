@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id Int @id @default(autoincrement())
+  username String @unique
+  email String @unique
+  password String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_active Boolean @default(true)
+  is_admin Boolean @default(false)
+  profile Profiles?
+  
+  education Educations[]
+  career Careers[]
+  skill Skills[]
+}
+
+model Profiles {
+    id Int @id @default(autoincrement())
+    firstName String 
+    lastName String
+    birth_date DateTime
+    address String
+    gender String?
+    status String?
+    created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  introduction String? @db.Text
+  social Socials?
+  user Users @relation(fields: [id],references: [id])
+}
+
+model Socials{
+  id Int @id @default(autoincrement())
+  linked_in String?
+  facebook String?
+  twitter String?
+  instagram String?
+  github String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  profile Profiles @relation(fields: [id],references: [id])
+}
+
+model Educations {
+  id Int @id @default(autoincrement())
+  user_id Int
+  institute String
+  certificate_name String
+  level String
+  start_year Int
+  end_year Int?
+  summary String? @db.Text
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user Users @relation(fields: [user_id],references: [id])
+}
+
+model Careers{
+  id Int @id @default(autoincrement())
+  user_id Int
+  company String
+  work_title String
+  location String
+  start_month Int
+  start_year Int
+  end_month Int?
+  end_year Int?
+  summary String? @db.Text
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user Users @relation(fields: [user_id],references: [id])
+}
+
+model Skills{
+  id Int @id @default(autoincrement())
+  user_id Int
+  skill_name String
+  level Languang_Level
+  is_language Boolean
+  description String? @db.Text
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime 
+  user Users @relation(fields: [user_id],references: [id])
+}
+
+enum Languang_Level {
+  Basic
+  Intermediate
+  Fluent
+}
