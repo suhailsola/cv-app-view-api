@@ -7,6 +7,7 @@ import errorHandler from "./middleware/errorHandler";
 import fourOhFour from "./middleware/fourOhFour";
 import root from "./routes/root";
 import ApiRoutes from "./routes/api";
+import { handleMultipartData } from "./middleware/upload";
 
 const app = express();
 
@@ -23,7 +24,7 @@ app.use(morgan("tiny"));
 
 // Apply routes before error handling
 app.use("/", root);
-app.use("/api", ApiRoutes);
+app.use("/api", handleMultipartData, ApiRoutes);
 
 // Apply error handling last
 app.use(fourOhFour);

@@ -1,14 +1,14 @@
 import { Router } from "express";
 
-const AuthRoutes = Router();
+const UserRoutes = Router();
 
-AuthRoutes.get("/", (req, res) => {
+UserRoutes.get("/", (req, res) => {
   try {
-    res.status(200).json({ message: "Authenticated" });
+    res.status(200).json({ message: "This is user route" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 });
 
-export default AuthRoutes;
+export default UserRoutes;

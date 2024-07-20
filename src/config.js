@@ -18,6 +18,7 @@ const config = {
     development: process.env["DEV_ORIGIN"] ?? "*",
     production: process.env["PROD_ORIGIN"] ?? "none",
   },
+  jwtSecretToken: process.env["JWT_SECRET_TOKEN"],
 };
 
 export default config;
