@@ -90,12 +90,12 @@ model Skills{
   id Int @id @default(autoincrement())
   user_id Int
   skill_name String
-  level Languang_Level
+  level Languang_Level?
   is_language Boolean
   description String? @db.Text
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  deleted_at DateTime 
+  deleted_at DateTime? 
   user Users @relation(fields: [user_id],references: [id])
 }
 
