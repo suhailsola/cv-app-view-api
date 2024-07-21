@@ -11,6 +11,8 @@ export const createSkills = async (req, res) => {
       data: {
         ...skills,
         user_id: Number(skills.user_id),
+        is_language: Boolean(skills.is_language),
+        level: skills.level ? skills.level : null,
       },
     });
     res.status(201).json(parseMessage("New skills created", data));

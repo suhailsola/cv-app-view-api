@@ -7,6 +7,9 @@ import { deleteEducation } from "../../controllers/user/education/deleteEducatio
 import { createCareer } from "../../controllers/user/career/createCareer";
 import { updateCareer } from "../../controllers/user/career/updateCareer";
 import { deleteCareer } from "../../controllers/user/career/deleteCareer";
+import { createSkills } from "../../controllers/user/skills/createSkills";
+import { updateSkills } from "../../controllers/user/skills/updateSkills";
+import { deleteSkills } from "../../controllers/user/skills/deleteSkills";
 
 const UserRoutes = Router();
 
@@ -34,4 +37,7 @@ UserRoutes.patch("/career/:id", updateCareer);
 UserRoutes.delete("/career/:id", deleteCareer);
 
 // Skills
+UserRoutes.post("/skills", createSkills);
+UserRoutes.patch("/skills/:id", updateSkills);
+UserRoutes.delete("/skills/:id", deleteSkills);
 export default UserRoutes;

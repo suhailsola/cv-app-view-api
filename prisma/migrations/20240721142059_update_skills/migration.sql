@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Skills" ALTER COLUMN "level" DROP NOT NULL,
+ALTER COLUMN "deleted_at" DROP NOT NULL;
