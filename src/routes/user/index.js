@@ -10,6 +10,8 @@ import { deleteCareer } from "../../controllers/user/career/deleteCareer";
 import { createSkills } from "../../controllers/user/skills/createSkills";
 import { updateSkills } from "../../controllers/user/skills/updateSkills";
 import { deleteSkills } from "../../controllers/user/skills/deleteSkills";
+import { getUserProfile } from "../../controllers/user/profile/getUserProfile";
+import { isAuthenticated } from "../../middleware/isAuthenticated";
 
 const UserRoutes = Router();
 
@@ -23,8 +25,9 @@ UserRoutes.get("/", (req, res) => {
 });
 
 // Profile
-UserRoutes.post("/", createUserProfile);
-UserRoutes.patch("/:id", updateUserProfile);
+UserRoutes.get("/:id", isAuthenticated, getUserProfile);
+UserRoutes.post("/", isAuthenticated, createUserProfile);
+UserRoutes.patch("/:id", isAuthenticated, updateUserProfile);
 
 // Education
 UserRoutes.post("/edu", createEducation);
