@@ -3,13 +3,15 @@ import { parseMessage } from "../../../utils/helpers/parseMessage";
 
 export const createUserProfile = async (req, res) => {
   const profile = req.body;
-
+  const id = req.user;
   // Convert date format
   const dateString = profile.birth_date;
   const [day, month, year] = dateString.split("/").map(Number);
   const convertDate = new Date(year, month - 1, day);
   profile.birth_date = convertDate.toISOString();
   //
+  profile.user_id = Number(id);
+
   if (Object.keys(profile).length === 0) {
     return res.status(400).json({ message: "Profile data is required" });
   }

@@ -3,7 +3,8 @@ import { parseMessage } from "../../../utils/helpers/parseMessage";
 
 export const updateUserProfile = async (req, res) => {
   const profile = req.body;
-  const id = req.params.id;
+  const id = req.user;
+  // const id = req.params.id;
 
   try {
     const data = await prisma.profiles.update({

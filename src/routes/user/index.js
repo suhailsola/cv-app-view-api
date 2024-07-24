@@ -15,19 +15,10 @@ import { isAuthenticated } from "../../middleware/isAuthenticated";
 
 const UserRoutes = Router();
 
-UserRoutes.get("/", (req, res) => {
-  try {
-    res.status(200).json({ message: "This is user route" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Something went wrong" });
-  }
-});
-
 // Profile
-UserRoutes.get("/:id", isAuthenticated, getUserProfile);
+UserRoutes.get("/", isAuthenticated, getUserProfile);
 UserRoutes.post("/", isAuthenticated, createUserProfile);
-UserRoutes.patch("/:id", isAuthenticated, updateUserProfile);
+UserRoutes.patch("/", isAuthenticated, updateUserProfile);
 
 // Education
 UserRoutes.post("/edu", createEducation);

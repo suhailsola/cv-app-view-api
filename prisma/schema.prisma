@@ -31,6 +31,7 @@ model Users {
 
 model Profiles {
     id Int @id @default(autoincrement())
+    user_id Int @unique
     firstName String 
     lastName String
     birth_date DateTime
@@ -41,11 +42,12 @@ model Profiles {
   updated_at DateTime @updatedAt
   introduction String? @db.Text
   social Socials?
-  user Users @relation(fields: [id],references: [id])
+  user Users @relation(fields: [user_id],references: [id])
 }
 
 model Socials{
   id Int @id @default(autoincrement())
+  user_id Int @unique
   linked_in String?
   facebook String?
   twitter String?
@@ -53,7 +55,7 @@ model Socials{
   github String?
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  profile Profiles @relation(fields: [id],references: [id])
+  profile Profiles @relation(fields: [user_id],references: [user_id])
 }
 
 model Educations {
