@@ -48,6 +48,7 @@ model Profiles {
 model Socials{
   id Int @id @default(autoincrement())
   user_id Int @unique
+  mobile String?
   linked_in String?
   facebook String?
   twitter String?
