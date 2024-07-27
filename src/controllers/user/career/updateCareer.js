@@ -4,9 +4,10 @@ import { parseMessage } from "../../../utils/helpers/parseMessage";
 export const updateCareer = async (req, res) => {
   const career = req.body;
   const id = req.params.id;
+  const user_id = req.user;
   try {
     const data = await prisma.careers.update({
-      where: { id: Number(id) },
+      where: { id: Number(id) && { user_id: Number(user_id) } },
       data: {
         ...career,
         ...(career.start_year && {

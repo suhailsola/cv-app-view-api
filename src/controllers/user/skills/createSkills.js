@@ -3,6 +3,7 @@ import { parseMessage } from "../../../utils/helpers/parseMessage";
 
 export const createSkills = async (req, res) => {
   const skills = req.body;
+  const id = req.user;
   if (Object.keys(skills).length === 0) {
     return res.status(400).json(parseMessage("Skills data is required"));
   }
@@ -10,7 +11,7 @@ export const createSkills = async (req, res) => {
     const data = await prisma.skills.create({
       data: {
         ...skills,
-        user_id: Number(skills.user_id),
+        user_id: Number(id),
         is_language: Boolean(skills.is_language),
         level: skills.level ? skills.level : null,
       },

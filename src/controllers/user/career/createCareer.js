@@ -3,7 +3,7 @@ import { parseMessage } from "../../../utils/helpers/parseMessage";
 
 export const createCareer = async (req, res) => {
   const career = req.body;
-
+  const id = req.user;
   if (Object.keys(career).length === 0) {
     return res.status(400).json(parseMessage("Career data is required"));
   }
@@ -11,7 +11,7 @@ export const createCareer = async (req, res) => {
     const data = await prisma.careers.create({
       data: {
         ...career,
-        user_id: Number(career.user_id),
+        user_id: Number(id),
         start_year: Number(career.start_year),
         start_month: Number(career.start_month),
         end_year: career.end_year ? Number(career.end_year) : null,

@@ -13,6 +13,7 @@ import { deleteSkills } from "../../controllers/user/skills/deleteSkills";
 import { getUserProfile } from "../../controllers/user/profile/getUserProfile";
 import { isAuthenticated } from "../../middleware/isAuthenticated";
 import { getEducation } from "../../controllers/user/education/getEducation";
+import { getCareer } from "../../controllers/user/career/getCareer";
 
 const UserRoutes = Router();
 
@@ -28,11 +29,13 @@ UserRoutes.patch("/edu/:id", isAuthenticated, updateEducation);
 UserRoutes.delete("/edu/:id", isAuthenticated, deleteEducation);
 
 // Career
-UserRoutes.post("/career", createCareer);
+UserRoutes.get("/career", isAuthenticated, getCareer);
+UserRoutes.post("/career", isAuthenticated, createCareer);
 UserRoutes.patch("/career/:id", isAuthenticated, updateCareer);
 UserRoutes.delete("/career/:id", isAuthenticated, deleteCareer);
 
 // Skills
+UserRoutes.get("/skills", isAuthenticated, createSkills);
 UserRoutes.post("/skills", isAuthenticated, createSkills);
 UserRoutes.patch("/skills/", isAuthenticated, updateSkills);
 UserRoutes.delete("/skills/", isAuthenticated, deleteSkills);

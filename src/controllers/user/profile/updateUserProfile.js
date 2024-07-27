@@ -6,6 +6,10 @@ export const updateUserProfile = async (req, res) => {
   const id = req.user;
   // const id = req.params.id;
 
+  // Convert date format
+  const profileDate = new Date(profile.birth_date);
+  profile.birth_date = profileDate.toISOString();
+  //
   try {
     const data = await prisma.profiles.update({
       where: { user_id: Number(id) },

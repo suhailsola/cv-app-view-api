@@ -3,9 +3,10 @@ import { parseMessage } from "../../../utils/helpers/parseMessage";
 
 export const deleteSkills = async (req, res) => {
   const id = req.params.id;
+  const user_id = req.user;
   try {
     const data = await prisma.skills.delete({
-      where: { id: Number(id) },
+      where: { id: Number(id) && { user_id: Number(user_id) } },
     });
     res.status(200).json(parseMessage("User skills deleted", data));
   } catch (error) {
