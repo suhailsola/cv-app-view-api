@@ -14,6 +14,11 @@ import { getUserProfile } from "../../controllers/user/profile/getUserProfile";
 import { isAuthenticated } from "../../middleware/isAuthenticated";
 import { getEducation } from "../../controllers/user/education/getEducation";
 import { getCareer } from "../../controllers/user/career/getCareer";
+import { getSkills } from "../../controllers/user/skills/getSkills";
+import { getCV } from "../../controllers/user/cv/getCV";
+import { createSocial } from "../../controllers/user/social/createSocial";
+import { updateSocial } from "../../controllers/user/social/updateSocial";
+import { getSocial } from "../../controllers/user/social/getSocial";
 
 const UserRoutes = Router();
 
@@ -35,8 +40,16 @@ UserRoutes.patch("/career/:id", isAuthenticated, updateCareer);
 UserRoutes.delete("/career/:id", isAuthenticated, deleteCareer);
 
 // Skills
-UserRoutes.get("/skills", isAuthenticated, createSkills);
+UserRoutes.get("/skills", isAuthenticated, getSkills);
 UserRoutes.post("/skills", isAuthenticated, createSkills);
-UserRoutes.patch("/skills/", isAuthenticated, updateSkills);
-UserRoutes.delete("/skills/", isAuthenticated, deleteSkills);
+UserRoutes.patch("/skills/:id", isAuthenticated, updateSkills);
+UserRoutes.delete("/skills/:id", isAuthenticated, deleteSkills);
+
+// Socials
+UserRoutes.get("/social", isAuthenticated, getSocial);
+UserRoutes.post("/social", isAuthenticated, createSocial);
+UserRoutes.patch("/social", isAuthenticated, updateSocial);
+
+// CV
+UserRoutes.get("/cv", isAuthenticated, getCV);
 export default UserRoutes;
